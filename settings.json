@@ -1,0 +1,40 @@
+{
+  "public": {
+    "timeOut": 30000,
+    "interval": 10000,
+    "apps": {
+      "accounts": {
+        "name": "Accounts",
+        "icon": "users",
+        "origin": "http://localhost:9090",
+        "host": "localhost"
+      },
+      "content": {
+        "name": "Content",
+        "icon": "file",
+        "origin": "http://localhost:3030",
+        "host": "localhost"
+      },
+      "otulea": {
+        "name": "otu.lea",
+        "icon": "edit",
+        "origin": "http://localhost:3000",
+        "host": "localhost"
+      }
+    }
+  },
+  "health": {
+    "limit": 250,
+    "secret": "lea.online.secret",
+    "thresholds": {
+      "load": 0.75,
+      "memory": 0.9,
+      "notAlive": 900000
+    }
+  },
+  "ping": 20000,
+  "emails": {
+    "to": ["admin@example.com"],
+    "from": "system@example.com"
+  }
+}

@@ -1,0 +1,76 @@
+<template name="health">
+    <h1 class="text-center">lea.online Status Monitor</h1>
+    <hr>
+
+    {{#if loading}}
+        <div class="container-fluid fixed-bottom">
+            <div class="alert alert-info">
+                Loading
+            </div>
+        </div>
+    {{/if}}
+    {{#each app in apps}}
+        <div class="card my-2">
+            <div class="card-header d-flex justify-content-between">
+                <span>
+                    {{> icon name=app.icon }} {{app.name}}
+                </span>
+                {{#with ping app.name}}
+                    {{#if isActive this.status}}
+                        <span class="badge badge-success">
+                            {{> icon name="check"}} {{this.status}}
+                        </span>
+                    {{else}}
+                        <span class="badge badge-danger">
+                            {{> icon name="times"}} {{this.status}}
+                        </span>
+                    {{/if}}
+                {{/with}}
+            </div>
+            {{#with data app.name}}
+                <table class="table table-hover">
+                    <tbody>
+                    <tr class="{{#if isTooOld this.createdAt}}bg-danger text-white{{/if}}">
+                        <td>last update</td>
+                        <td>{{this.createdAt.toLocaleString}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>sessions</td>
+                        <td>{{this.sessions}}</td>
+                    </tr>
+
+                    {{#each sub in (values subs)}}
+                        <tr>
+                            <td>{{sub.name}}</td>
+                            <td>{{sub.value}}</td>
+                        </tr>
+                    {{/each}}
+
+                    <tr>
+                        <td>uptime</td>
+                        <td>{{this.osuptime}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>memory</td>
+                        <td>{{memory this.osfreemem this.ostotalmem}}% of {{this.ostotalmem.toFixed 2}} MB</td>
+                    </tr>
+
+                    {{#each load in this.osload}}
+                    <tr>
+                        <td>load {{@index}}</td>
+                        <td>{{load}} %</td>
+                    </tr>
+                    {{/each}}
+
+                    </tbody>
+                </table>
+            {{else}}
+                <div class="card-body bg-warning">
+                    No data :-(
+                </div>
+            {{/with}}
+        </div>
+    {{/each}}
+</template>
