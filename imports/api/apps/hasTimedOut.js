@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor'
+
 const { timeOut } = Meteor.settings.public
 
 export const hasTimedOut = timestamp => {

@@ -36,7 +36,6 @@ Ping.methods.all = {
   name: 'ping.methods.all',
   schema: {},
   run: onServerExec(function () {
-
     return function () {
       // TODO restrict by app names in settings.json listed
       return Ping.collection().find().fetch()

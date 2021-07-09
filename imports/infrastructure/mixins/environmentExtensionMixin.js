@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor'
 import { createLog } from '../../utils/createLog'
 
 /**
@@ -13,12 +14,12 @@ export const environmentExtensionMixin = function (options) {
 
   const envOptions = env || {}
   const { devOnly } = envOptions
-  const skip = devOnly &&  !Meteor.isDevelopment
-  const info =  skip
-    ? (() => {})
+  const skip = devOnly && !Meteor.isDevelopment
+  const info = skip
+    ? () => {}
     : createLog({ name: options.name, target: console.info })
   const debug = skip
-    ? (() => {})
+    ? () => {}
     : createLog({ name: options.name, target: console.debug })
 
   const runFct = options.run

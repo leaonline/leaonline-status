@@ -1,9 +1,8 @@
 import { Meteor } from 'meteor/meteor'
-import { Tracker } from 'meteor/tracker'
 
 Meteor.startup(() => {
   setTimeout(async () => {
-    const popper = (await import('popper.js')).default
+    const popper = (await import('@popperjs/core')).default
     global.Popper = global.Popper || popper
   }, 1000)
 

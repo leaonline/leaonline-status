@@ -49,14 +49,12 @@ Meteor.startup(() => {
             })
           })
           .then(res => {
-            const { sent, received, duration, numeric_host, alive} = res
-
-
+            const { sent, received, duration, numeric_host: numericHost, alive } = res
 
             const newDoc = {
               timestamp: new Date(),
               app: app.name,
-              ip: numeric_host || app.origin,
+              ip: numericHost || app.origin,
               sent: sent,
               received: received,
               status: alive ? 'alive' : 'notAlive',
@@ -79,7 +77,6 @@ Meteor.startup(() => {
       })
     })
   }, ping)
-
 
   function checkLast (app, errorName) {
     // if we can't reach the app, we check for the last ping and send

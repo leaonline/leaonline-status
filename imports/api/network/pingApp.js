@@ -11,7 +11,8 @@ export const pingApp = async ({ host }) => {
     return {
       sent, received, duration, ...pingResponse
     }
-  } catch (e) {
+  }
+  catch (e) {
     e.sent = sent
     e.received = new Date()
     e.duration = e.received - sent

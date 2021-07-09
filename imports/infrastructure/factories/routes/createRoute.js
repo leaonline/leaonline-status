@@ -8,7 +8,6 @@ import bodyParser from 'body-parser'
 WebApp.connectHandlers.urlEncoded(bodyParser)
 WebApp.connectHandlers.json(bodyParser)
 
-
 const allowedOrigins = Object
   .values(Meteor.settings.public.apps)
   .map(host => host.origin)
@@ -18,9 +17,8 @@ const corsOptions = {
   origin: function (origin, callback) {
     if (!origin) {
       return callback(null, true)
-      //return callback(new Error(`${origin} is not allowed by CORS`))
+      // return callback(new Error(`${origin} is not allowed by CORS`))
     }
-
 
     if (allowedOrigins.some(allowed => origin.includes(allowed))) {
       return callback(null, true)

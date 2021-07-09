@@ -1,9 +1,9 @@
+import { Meteor } from 'meteor/meteor'
 import { onServerExec } from '../../utils/arch'
-import { Meteor } from "meteor/meteor"
 
 export const Health = {
   name: 'health',
-  icon: "health",
+  icon: 'health',
   label: 'health.title'
 }
 
@@ -32,7 +32,7 @@ Health.methods.latest = {
   name: 'health.methods.latest',
   validate () {},
   run: onServerExec(function () {
-    const hint = { $natural: - 1 }
+    const hint = { $natural: -1 }
     const { limit } = Meteor.settings.health
 
     return function () {
@@ -65,7 +65,7 @@ Health.routes.collection = {
     import { Schema } from '../../api/schema/Schema'
     import { createHmac } from 'crypto'
 
-    const { secret, phrase } = Meteor.settings.health
+    const { secret } = Meteor.settings.health
     const { app, createdAt, ...healthSchema } = Health.schema
     const schema = Schema.create({
       ...healthSchema,
